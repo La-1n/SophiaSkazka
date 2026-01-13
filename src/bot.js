@@ -195,6 +195,12 @@ function createBot(token) {
   bot.action('location', async (ctx) => {
     await ctx.answerCbQuery();
 
+    try {
+      await ctx.deleteMessage();
+    } catch (e) {
+      // Сообщение уже удалено
+    }
+
     const buttons = Markup.inlineKeyboard([
       [
         Markup.button.url(
@@ -205,7 +211,7 @@ function createBot(token) {
       [Markup.button.callback('« Назад в меню', 'menu')],
     ]);
 
-    await ctx.editMessageCaption(texts.location, {
+    await ctx.reply(texts.location, {
       parse_mode: 'Markdown',
       ...buttons,
     });
@@ -214,7 +220,14 @@ function createBot(token) {
   // FAQ
   bot.action('faq', async (ctx) => {
     await ctx.answerCbQuery();
-    await ctx.editMessageCaption(texts.faq, {
+
+    try {
+      await ctx.deleteMessage();
+    } catch (e) {
+      // Сообщение уже удалено
+    }
+
+    await ctx.reply(texts.faq, {
       parse_mode: 'Markdown',
       ...backToMenu,
     });
@@ -223,6 +236,12 @@ function createBot(token) {
   // Отзывы
   bot.action('reviews', async (ctx) => {
     await ctx.answerCbQuery();
+
+    try {
+      await ctx.deleteMessage();
+    } catch (e) {
+      // Сообщение уже удалено
+    }
 
     let text = `⭐  *Отзывы гостей*\n`;
     text += `${DOTLINE}\n\n`;
@@ -238,12 +257,18 @@ function createBot(token) {
       [Markup.button.callback('« Назад в меню', 'menu')],
     ]);
 
-    await ctx.editMessageCaption(text, { parse_mode: 'Markdown', ...buttons });
+    await ctx.reply(text, { parse_mode: 'Markdown', ...buttons });
   });
 
   // Контакты
   bot.action('contacts', async (ctx) => {
     await ctx.answerCbQuery();
+
+    try {
+      await ctx.deleteMessage();
+    } catch (e) {
+      // Сообщение уже удалено
+    }
 
     const buttons = Markup.inlineKeyboard([
       [Markup.button.url('💬 WhatsApp', settings.whatsapp)],
@@ -251,7 +276,7 @@ function createBot(token) {
       [Markup.button.callback('« Назад в меню', 'menu')],
     ]);
 
-    await ctx.editMessageCaption(texts.contact, {
+    await ctx.reply(texts.contact, {
       parse_mode: 'Markdown',
       ...buttons,
     });
@@ -261,13 +286,19 @@ function createBot(token) {
   bot.action('booking', async (ctx) => {
     await ctx.answerCbQuery();
 
+    try {
+      await ctx.deleteMessage();
+    } catch (e) {
+      // Сообщение уже удалено
+    }
+
     const buttons = Markup.inlineKeyboard([
       [Markup.button.url('✈️ Написать в Telegram', settings.telegram)],
       [Markup.button.callback('🏠 Посмотреть домики', 'houses')],
       [Markup.button.callback('« Назад в меню', 'menu')],
     ]);
 
-    await ctx.editMessageCaption(texts.bookingInfo, {
+    await ctx.reply(texts.bookingInfo, {
       parse_mode: 'Markdown',
       ...buttons,
     });
