@@ -1,4 +1,6 @@
 const { Telegraf, Markup } = require('telegraf');
+const path = require('path');
+const { Input } = require('telegraf');
 const houses = require('./config/houses');
 const texts = require('./config/texts');
 const reviews = require('./config/reviews');
@@ -6,6 +8,7 @@ const settings = require('./config/settings');
 
 const DOTLINE = '┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈';
 const HOUSES_PER_PAGE = 1;
+const LOGO_PATH = path.join(__dirname, '..', 'logo.jpg');
 
 // Хранилище ID сообщений для каждого пользователя (фото + описания)
 const userMessages = new Map();
@@ -32,6 +35,7 @@ function createBot(token) {
       Markup.button.callback('⭐ Отзывы', 'reviews'),
       Markup.button.callback('📞 Контакты', 'contacts'),
     ],
+    [Markup.button.url('🖼 Галерея', settings.gallery)],
     [Markup.button.url('🌐 Наш сайт', settings.website)],
     [Markup.button.url('📸 Instagram', settings.instagram)],
   ]);
@@ -54,7 +58,11 @@ function createBot(token) {
 
   // Старт
   bot.start((ctx) => {
-    ctx.reply(texts.welcome, { parse_mode: 'Markdown', ...mainMenu });
+    ctx.replyWithPhoto(Input.fromLocalFile(LOGO_PATH), {
+      caption: texts.welcome,
+      parse_mode: 'Markdown',
+      ...mainMenu,
+    });
   });
 
   // Главное меню
@@ -64,17 +72,16 @@ function createBot(token) {
     await deleteUserMessages(ctx, userId);
 
     try {
-      await ctx.editMessageText(texts.welcome, {
-        parse_mode: 'Markdown',
-        ...mainMenu,
-      });
-    } catch (e) {
       await ctx.deleteMessage();
-      await ctx.reply(texts.welcome, {
-        parse_mode: 'Markdown',
-        ...mainMenu,
-      });
+    } catch (e) {
+      // Сообщение уже удалено
     }
+
+    await ctx.replyWithPhoto(Input.fromLocalFile(LOGO_PATH), {
+      caption: texts.welcome,
+      parse_mode: 'Markdown',
+      ...mainMenu,
+    });
   });
 
   // Удаление сообщений пользователя
