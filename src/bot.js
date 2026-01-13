@@ -13,8 +13,8 @@ const userMessages = new Map();
 // Генерация ссылки на Telegram с шаблоном сообщения
 function getTelegramBookingUrl(houseName) {
   const text = houseName
-    ? `Здравствуйте! Хочу забронировать домик "${houseName}".`
-    : 'Здравствуйте! Хочу забронировать домик.';
+    ? `Здравствуйте! Хочу забронировать "${houseName}".`
+    : 'Здравствуйте! Хочу забронировать.';
   return `https://t.me/Azret_0926?text=${encodeURIComponent(text)}`;
 }
 
