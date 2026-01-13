@@ -208,7 +208,7 @@ function createBot(token) {
       [Markup.button.callback('« Назад в меню', 'menu')],
     ]);
 
-    await ctx.editMessageText(texts.location, {
+    await ctx.editMessageCaption(texts.location, {
       parse_mode: 'Markdown',
       ...buttons,
     });
@@ -217,7 +217,7 @@ function createBot(token) {
   // FAQ
   bot.action('faq', async (ctx) => {
     await ctx.answerCbQuery();
-    await ctx.editMessageText(texts.faq, {
+    await ctx.editMessageCaption(texts.faq, {
       parse_mode: 'Markdown',
       ...backToMenu,
     });
@@ -241,7 +241,7 @@ function createBot(token) {
       [Markup.button.callback('« Назад в меню', 'menu')],
     ]);
 
-    await ctx.editMessageText(text, { parse_mode: 'Markdown', ...buttons });
+    await ctx.editMessageCaption(text, { parse_mode: 'Markdown', ...buttons });
   });
 
   // Контакты
@@ -254,7 +254,7 @@ function createBot(token) {
       [Markup.button.callback('« Назад в меню', 'menu')],
     ]);
 
-    await ctx.editMessageText(texts.contact, {
+    await ctx.editMessageCaption(texts.contact, {
       parse_mode: 'Markdown',
       ...buttons,
     });
@@ -270,7 +270,7 @@ function createBot(token) {
       [Markup.button.callback('« Назад в меню', 'menu')],
     ]);
 
-    await ctx.editMessageText(texts.bookingInfo, {
+    await ctx.editMessageCaption(texts.bookingInfo, {
       parse_mode: 'Markdown',
       ...buttons,
     });
