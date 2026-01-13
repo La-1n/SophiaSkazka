@@ -25,6 +25,7 @@ function createBot(token) {
       Markup.button.callback('📞 Контакты', 'contacts'),
     ],
     [Markup.button.url('🌐 Наш сайт', settings.website)],
+    [Markup.button.url('📸 Instagram', settings.instagram)],
   ]);
 
   const backToMenu = Markup.inlineKeyboard([
