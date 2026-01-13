@@ -11,5 +11,6 @@ module.exports = {
   "instagram": "https://www.instagram.com/sofiyskaya_skazka_09",
   "gallery": "https://yandex.ru/maps/org/sofiyskaya_skazka_09/9544253521/gallery/?ll=41.228827%2C43.525158&photos%5Bbusiness%5D=9544253521&z=17",
   "website": "https://sofijskaja-skazka-09.clients.site/",
-  "yandexMapsLocation": "https://yandex.ru/maps/org/sofiyskaya_skazka_09/9544253521/"
+  "yandexMapsLocation": "https://yandex.ru/maps/org/sofiyskaya_skazka_09/9544253521/",
+  "logo": "https://avatars.mds.yandex.net/get-altay/16430504/2a00000199a731da5bb69f8678cd486a50b7/XXXL"
 };

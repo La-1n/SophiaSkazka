@@ -1,6 +1,4 @@
 const { Telegraf, Markup } = require('telegraf');
-const path = require('path');
-const { Input } = require('telegraf');
 const houses = require('./config/houses');
 const texts = require('./config/texts');
 const reviews = require('./config/reviews');
@@ -8,7 +6,6 @@ const settings = require('./config/settings');
 
 const DOTLINE = '┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈';
 const HOUSES_PER_PAGE = 1;
-const LOGO_PATH = path.join(__dirname, '..', 'logo.jpg');
 
 // Хранилище ID сообщений для каждого пользователя (фото + описания)
 const userMessages = new Map();
@@ -58,7 +55,7 @@ function createBot(token) {
 
   // Старт
   bot.start((ctx) => {
-    ctx.replyWithPhoto(Input.fromLocalFile(LOGO_PATH), {
+    ctx.replyWithPhoto(settings.logo, {
       caption: texts.welcome,
       parse_mode: 'Markdown',
       ...mainMenu,
@@ -77,7 +74,7 @@ function createBot(token) {
       // Сообщение уже удалено
     }
 
-    await ctx.replyWithPhoto(Input.fromLocalFile(LOGO_PATH), {
+    await ctx.replyWithPhoto(settings.logo, {
       caption: texts.welcome,
       parse_mode: 'Markdown',
       ...mainMenu,
