@@ -10,6 +10,14 @@ const HOUSES_PER_PAGE = 1;
 // Хранилище ID сообщений для каждого пользователя (фото + описания)
 const userMessages = new Map();
 
+// Генерация ссылки на Telegram с шаблоном сообщения
+function getTelegramBookingUrl(houseName) {
+  const text = houseName
+    ? `Здравствуйте! Хочу забронировать домик "${houseName}".`
+    : 'Здравствуйте! Хочу забронировать домик.';
+  return `https://t.me/Azret_0926?text=${encodeURIComponent(text)}`;
+}
+
 function createBot(token) {
   const bot = new Telegraf(token);
 
@@ -145,7 +153,7 @@ function createBot(token) {
         if (navButtons.length > 0) {
           buttons.push(navButtons);
         }
-        buttons.push([Markup.button.url('✈️ Забронировать', settings.telegram)]);
+        buttons.push([Markup.button.url('✈️ Забронировать', getTelegramBookingUrl(house.name))]);
         buttons.push([Markup.button.callback('« Назад в меню', 'menu')]);
 
         if (totalPages > 1) {
